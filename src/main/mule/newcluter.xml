@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<flow name="newcluterFlow" doc:id="ce9df783-576d-4bfb-b154-e6d9ffa9bfc4" >
+		<http:listener doc:name="Listener" doc:id="3c41827e-e7bf-4f85-bb59-569601e9c1fa" config-ref="HTTP_Listener_config_newdomain" path="/nc"/>
+		<set-variable value="#[now()]" doc:name="Set Variable" doc:id="7d0f845e-eb65-4162-a123-8871cdabf449" variableName="now"/>
+		<ee:transform doc:name="Transform Message" doc:id="0ccef514-8a0e-417f-8c8a-9c3438d8c2af" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	time: vars.now,
+	response : {
+		method: attributes.method,
+		headers: attributes.headers
+	},
+	payload: payload,
+	attributes: attributes
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="Logger" doc:id="127bd558-d0fb-4346-b06a-bef9813467f9" message="payload"/>
+	</flow>
+</mule>
