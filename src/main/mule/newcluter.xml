@@ -8,7 +8,7 @@ http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/
 	<flow name="newcluterFlow" doc:id="ce9df783-576d-4bfb-b154-e6d9ffa9bfc4" >
 		<http:listener doc:name="Listener" doc:id="3c41827e-e7bf-4f85-bb59-569601e9c1fa" config-ref="HTTP_Listener_config_newdomain" path="/nc"/>
 		<set-variable value="#[now()]" doc:name="Set Variable" doc:id="7d0f845e-eb65-4162-a123-8871cdabf449" variableName="now"/>
-		<set-variable value="done until documentation!" doc:name="Set Variable: comment" doc:id="81bdbfa3-7f5b-4cbc-817d-6d69a5ffdf32" variableName="comment"/>
+		<set-variable value="jenkins success!!" doc:name="Set Variable: comment" doc:id="81bdbfa3-7f5b-4cbc-817d-6d69a5ffdf32" variableName="comment"/>
 		<ee:transform doc:name="Transform Message" doc:id="0ccef514-8a0e-417f-8c8a-9c3438d8c2af" >
 			<ee:message >
 				<ee:set-payload ><![CDATA[%dw 2.0
